@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    Mysql ORDER BY优化总结 | Lose Yourself
+  </title>
+  <meta name="description" content="在信息时代，客观障碍已不复存在，所谓障碍都是主观上的。">
+  
+  <meta name="keywords" content="
+  Mysql
+  ">
+  
+  <meta name="author" content="iamnotshady">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://avatars3.githubusercontent.com/u/16269364?s=460&amp;v=4"> <i class="fa fa-caret-down"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives" class="header-toolbar-right"> 2 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i class="fa fa-tags"></i> Tags </a>
+        <a href="/tags" class="header-toolbar-right"> 1 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories" class="header-toolbar-right"> 1 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Lose Yourself</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    iamnotshady
+
+    <span class="post-date float-right" title="{{moment(1551834263000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+      {{moment(1551834263000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>Mysql ORDER BY优化总结</h1>
+    <h3 id="ORDER-BY优化"><a href="#ORDER-BY优化" class="headerlink" title="ORDER BY优化"></a>ORDER BY优化</h3><ul>
+<li><p>尽量对较少的行进行排序</p>
+</li>
+<li><p>如果连接了多张表，ORDER BY的列应该属于连接顺序的第一张表</p>
+</li>
+<li><p>利用索引排序，如果不能利用索引排序，那么EXPLAIN查询语句将会看到有filesort</p>
+</li>
+<li><p>需要保证索引列和ORDER BY的列相同，且各列均按相同的方向进行排序</p>
+</li>
+</ul>
+<h3 id="索引排序"><a href="#索引排序" class="headerlink" title="索引排序"></a>索引排序</h3><ol>
+<li><p>order by单一列时，在该列建立索引</p>
+</li>
+<li><p>order by多列时， 建立联合索引，order by满足索引最左前缀</p>
+</li>
+<li><p>建立联合索引,使where子句与order by子句条件列组合满足索引最左前缀</p>
+</li>
+</ol>
+<h3 id="filesort排序"><a href="#filesort排序" class="headerlink" title="filesort排序"></a>filesort排序</h3><ul>
+<li><p>双路排序</p>
+<p>  这是旧的算法。列长度之和超过max_length_for_sort_data字节时就使用这个算法，其原理是：先按照WHERE筛选条件读取数据行，并存储每行的排序字段和行指针到排序缓冲（sort buffer）。如果排序缓冲大小不够，就在内存中运行一个快速排序（quick sort）操作，把排序结果存储到一个临时文件里，用一个指针指向这个已经排序好了的块。然后继续读取数据，直到所有行都读取完毕为止。这是第一次读取记录。然后合并如上的临时文件，进行排序。然后依据排序结果再去读取所需要的数据，读入行缓冲（row buffer，由read_rnd_buffer_size参数设定其大小）。这是第二次读取记录。以上第一次读取记录时，可以按照索引排序或表扫描，可以做到顺序读取。但第二次读取记录时，虽然排序字段是有序的，行缓冲里存储的行指针是有序的，但所指向的物理记录需要随机读，所以这个算法可能会带来很多随机读，从而导致效率不佳</p>
+</li>
+<li><p>单路排序</p>
+<p>  MySQL一般使用这种算法。其原理是：按筛选条件，把SQL中涉及的字段全部读入排序缓冲中，然后依据排序字段进行排序，如果排序缓冲不够，则会将临时排序结果写入到一个临时文件中，最后合并临时排序文件，直接返回已经排序好的结果集</p>
+</li>
+</ul>
+<h3 id="优化filesort"><a href="#优化filesort" class="headerlink" title="优化filesort"></a>优化filesort</h3><ul>
+<li><p>加大 max_length_for_sort_data 参数的设置</p>
+<p>  当所有返回字段的最大长度小于这个参数值时，MySQL 就会选择改进后的单路排序，反之，则选择老式的双路排序。所以，如果有充足的内存让MySQL 存放须要返回的非排序字段，就可以加大这个参数的值来让 MySQL 选择使用改进版的排序算法。</p>
+</li>
+<li><p>去掉不必要的返回字段</p>
+<p>  当内存不是很充裕时，不能简单地通过强行加大上面的参数来强迫 MySQL 去使用改进版的排序算法，否则可能会造成 MySQL 不得不将数据分成很多段，然后进行排序，这样可能会得不偿失。此时就须要去掉不必要的返回字段，让返回结果长度适应 max_length_for_sort_data 参数的限制。</p>
+</li>
+<li><p>增大 sort_buffer_size 参数设置</p>
+<p>  增大sort_buffer_size并不是为了让MySQL选择改进版的排序算法，而是为了让MySQL尽量减少在排序过程中对需要排序的数据进行分段，因为分段会造成 MySQL 使用临时表来进行交换排序。</p>
+</li>
+</ul>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <a href="https://iamnotshady.github.io" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2016 iamnotshady</li>
+      <li><a href="https://iamnotshady.github.io">Home</a></li>
+      
+      <li><a href="https://github.com/IamNotShady">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>
