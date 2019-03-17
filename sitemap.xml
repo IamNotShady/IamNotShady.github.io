@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iamnotshady.github.io/2019/03/17/spring-security-custom-haspermission-like-shiro/</loc>
+    
+    <lastmod>2019-03-17T09:37:17.350Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://iamnotshady.github.io/2019/03/10/Mysql-Innodb-Lock/</loc>
     
     <lastmod>2019-03-12T15:49:31.764Z</lastmod>
