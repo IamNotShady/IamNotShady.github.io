@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iamnotshady.github.io/2019/03/30/consistent-hash-load-balance/</loc>
+    
+    <lastmod>2019-03-30T03:56:09.304Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://iamnotshady.github.io/2019/03/17/spring-security-custom-haspermission-like-shiro/</loc>
     
     <lastmod>2019-03-17T09:38:54.586Z</lastmod>
