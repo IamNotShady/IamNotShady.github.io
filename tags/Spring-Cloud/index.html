@@ -141,12 +141,12 @@
   <ul class="clearfix">
     <li class>
       <a href="/">Overview</a></li>
-    <li class="selected">
+    <li class>
       <a href="/archives">Posts <span class="counter">5</span></a>
     </li>
     <li class>
       <a href="/categories">Categories <span class="counter">4</span></a></li>
-    <li class>
+    <li class="selected">
       <a href="/tags">Tags <span class="counter">4</span></a></li>
   </ul>
 </nav>
@@ -172,98 +172,6 @@
             <span><i class="fa fa-folder-open"></i> Spring Cloud </span>
             <span><i class="fa fa-tag"></i> 1 </span>
             <span>Published {{moment(1554552263000).fromNow()}}</span>
-          </div>
-        </li>
-        
-        <li class="archive-list-item">
-          <h2><a href="/2019/03/30/consistent-hash-load-balance/">Consistent Hash Load Balance</a></h2>
-          <p>
-               背景介绍  
- 最近和小伙伴在一起在做 tim 这个开源IM服务，考虑到历史消息，路由信息，会话列表这些使用内存缓存性能更高， 所以需要一个一致性hash负载均衡算法，保证服务上下线后缓存命中率更高. 这里不对一致性hash做详细介绍，网上有很多资料，可以自行google. 
-   实现方式 ...
-          </p>
-          <ul class="tag-list clearfix">
-            
-            <li class="tag-list-item">Algorithm</li>
-            
-          </ul>
-          <div class="post-info">
-            <span><i class="fa fa-folder-open"></i> Algorithm </span>
-            <span><i class="fa fa-tag"></i> 1 </span>
-            <span>Published {{moment(1553917806000).fromNow()}}</span>
-          </div>
-        </li>
-        
-        <li class="archive-list-item">
-          <h2><a href="/2019/03/17/spring-security-custom-haspermission-like-shiro/">Spring Security Wildcard Permissions</a></h2>
-          <p>
-               背景介绍  
- Shiro的 Wildcard Permissions 机制非常不错,具有很高的灵活性，奈何项目使用Spring Security，为了能支持更丰富的权限控制，所以就参考Shiro在Spring Security中实现 Wildcard Permissions。 
-   实现方...
-          </p>
-          <ul class="tag-list clearfix">
-            
-            <li class="tag-list-item">Spring Security</li>
-            
-          </ul>
-          <div class="post-info">
-            <span><i class="fa fa-folder-open"></i> Spring Security </span>
-            <span><i class="fa fa-tag"></i> 1 </span>
-            <span>Published {{moment(1552813926000).fromNow()}}</span>
-          </div>
-        </li>
-        
-        <li class="archive-list-item">
-          <h2><a href="/2019/03/10/Mysql-Innodb-Lock/">Mysql InnoDB 锁总结</a></h2>
-          <p>
-               锁类型  
-  排他锁(写锁、X锁) 
-   会阻塞其他事物读和写 
- 
-  共享锁(读锁、S锁) 
-   会阻塞其他事物修改表数据 
- 
-  意向锁 
-   意向锁与行锁互不排斥，意向锁之间互不排斥，意向锁与表锁互斥! 
- 
- 
-   锁粒度  
-  行锁 
-   开销大，加锁慢；会出现死锁...
-          </p>
-          <ul class="tag-list clearfix">
-            
-            <li class="tag-list-item">Mysql</li>
-            
-          </ul>
-          <div class="post-info">
-            <span><i class="fa fa-folder-open"></i> Mysql </span>
-            <span><i class="fa fa-tag"></i> 1 </span>
-            <span>Published {{moment(1552205830000).fromNow()}}</span>
-          </div>
-        </li>
-        
-        <li class="archive-list-item">
-          <h2><a href="/2019/03/06/mysql-order-by/">Mysql ORDER BY优化总结</a></h2>
-          <p>
-               ORDER BY优化  
-  尽量对较少的行进行排序 
- 
-  如果连接了多张表，ORDER BY的列应该属于连接顺序的第一张表 
- 
-  利用索引排序，如果不能利用索引排序，那么EXPLAIN查询语句将会看到有filesort 
- 
-  需要保证索引列和ORDER BY的列相同，且各列均按相...
-          </p>
-          <ul class="tag-list clearfix">
-            
-            <li class="tag-list-item">Mysql</li>
-            
-          </ul>
-          <div class="post-info">
-            <span><i class="fa fa-folder-open"></i> Mysql </span>
-            <span><i class="fa fa-tag"></i> 1 </span>
-            <span>Published {{moment(1551834263000).fromNow()}}</span>
           </div>
         </li>
         

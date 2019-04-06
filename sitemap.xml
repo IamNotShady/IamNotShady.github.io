@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iamnotshady.github.io/2019/04/06/spring-cloud-zookeeper/</loc>
+    
+    <lastmod>2019-04-06T13:07:07.675Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://iamnotshady.github.io/2019/03/30/consistent-hash-load-balance/</loc>
     
     <lastmod>2019-03-30T03:56:09.304Z</lastmod>
@@ -23,7 +30,7 @@
   </url>
   
   <url>
-    <loc>https://iamnotshady.github.io/2019/03/06/Mysql-order-by/</loc>
+    <loc>https://iamnotshady.github.io/2019/03/06/mysql-order-by/</loc>
     
     <lastmod>2019-03-10T09:39:44.927Z</lastmod>
     
