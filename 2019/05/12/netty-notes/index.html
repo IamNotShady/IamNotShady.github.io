@@ -152,6 +152,22 @@
 <li>对于断包问题先读出包头即包体长度n，由于此次读取的缓存池长度小于n，这时候就需要先缓存这部分的内容，等待下次read事件来时拼接起来形成完整的数据包。</li>
 <li>由于读取channel数据到ByteBuffer缓存池时ByteBuffer的大小限制，client的一次write事件不一定一一对应server的read事件，所以需要一个全局变量来缓存这部分不完整的数据包</li>
 </ul>
+<p>NioEventLoopGroup实际上就是个线程池，NioEventLoopGroup在后台启动了n个NioEventLoop来处理Channel事件,每一个NioEventLoop负责处理m个Channel，NioEventLoopGroup从NioEventLoop数组里挨个取出NioEventLoop来处理Channel。<br>channelHandler的典型用例包括：</p>
+<pre><code>* 将数据从一种格式转换为另一种格式；
+* 提供异常的通知；
+* 提供Channel变为活动的或者非活动的通知；
+* 提供当Channel注册到EventLoop或者从EventLoop注销时的通知；
+* 提供有关用户自定义事件的通知。
+</code></pre><p>在Netty中，有两种发送消息的方式。你可以直接写到Channel中，也可以写到和Channel-Handler相关联的ChannelHandlerContext对象中。前一种方式将会导致消息从Channel-Pipeline的尾端开始流动，而后者将导致消息从ChannelPipeline中的下一个Channel-Handler开始流动。</p>
+<ul>
+<li>一个EventLoop在它的生命周期内只和一个Thread绑定；</li>
+<li>所有由EventLoop处理的I/O事件都将在它专有的Thread上被处理；</li>
+<li>一个Channel在它的生命周期内只注册于一个EventLoop ；</li>
+<li>一个EventLoop可能会被分配给一个或多个Channel 。</li>
+</ul>
+<p>epoll是linux特定内核，比如2.6以上的io方式。比如stackoverflow上有两者的比较，有人给出回复：If you are running on linux you can use EpollEventLoopGroup and so get better performance, less GC and have more advanced features that are only available on linux.就是在linux上使用EpollEventLoopGroup会有较少的gc有更高级的特性，只有在Linux上才可以使用。那么这句话几乎告诉我们epoll是最好的了，因为现在几乎所有的服务端程序都运行在Linux上。</p>
+<p>NioEventLoop循环调用 Selector中的注册的SelectionKey获取每个连接的数据。然后把获取到的字节数据传送给ChannelPipeline处理。EpollEventLoop通过epollWait来得到数据事件，循环EpollEventArray的事件处理每个连接的数据。也是传给ChannelPipeline处理。所以epoll相对性能更高一些。Netty4增加了sharable注解，使得handler能够被添加到多个ChannelPipeline中，一个handler可以产生多个ChannelHandlerContext，使得对应的handler可以在不同的channel中使用，此时应该注意线程安全</p>
+<p>当我们把一个Direct Buffer写入Channel的时候，就好比是“内核缓冲区”的内容直接写入了Channel，这样显然快了，减少了数据拷贝（因为我们平时的read/write都是需要在I/O设备与应用程序空间之间的“内核缓冲区”中转一下的）。而当我们把一个Heap Buffer写入Channel的时候，实际上底层实现会先构建一个临时的Direct Buffer，然后把Heap Buffer的内容复制到这个临时的Direct Buffer上，再把这个Direct Buffer写出去。当然，如果我们多次调用write方法，把一个Heap Buffer写入Channel，底层实现可以重复使用临时的Direct Buffer，这样不至于因为频繁地创建和销毁Direct Buffer影响性能</p>
 <p><a href="https://tech.meituan.com/2018/10/18/netty-direct-memory-screening.html" target="_blank" rel="noopener">Netty堆外内存泄露排查盛宴 - 美团技术团队</a><br><a href="https://segmentfault.com/a/1190000007308934" target="_blank" rel="noopener">Netty 源码分析之 二 贯穿Netty 的大动脉 ── ChannelPipeline (一) - 后台开发 - SegmentFault 思否</a></p>
 
   </article>
