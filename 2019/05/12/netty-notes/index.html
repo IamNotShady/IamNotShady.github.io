@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    Netty 学习笔记 | Lose Yourself
+  </title>
+  <meta name="description" content="在信息时代，客观障碍已不复存在，所谓障碍都是主观上的。">
+  
+  <meta name="keywords" content="
+  Netty
+  ">
+  
+  <meta name="author" content="iamnotshady">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://avatars3.githubusercontent.com/u/16269364?s=460&amp;v=4"> <i class="fa fa-caret-down"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives" class="header-toolbar-right"> 6 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i class="fa fa-tags"></i> Tags </a>
+        <a href="/tags" class="header-toolbar-right"> 5 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories" class="header-toolbar-right"> 5 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Lose Yourself</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    iamnotshady
+
+    <span class="post-date float-right" title="{{moment(1557653646000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+      {{moment(1557653646000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>Netty 学习笔记</h1>
+    <h3 id="Netty学习笔记整理"><a href="#Netty学习笔记整理" class="headerlink" title="Netty学习笔记整理"></a>Netty学习笔记整理</h3><p><img src="2A159310-2B5B-4F12-8DFB-155955F4C199.png" alt></p>
+<p><img src="7AE85D9C-0A93-4D16-8EAB-652DAFAF01B2.png" alt></p>
+<p><img src="3CF27B25-7732-4367-9535-20B1EF5082F8.png" alt><br>ByteBuffer的底层实现是byte数组</p>
+<p><img src="9E89AC7D-DC38-445E-9775-1037E088B38D.png" alt></p>
+<p><img src="2D9D483E-7C73-4A5B-9693-1177BCC5FA91.png" alt></p>
+<p><img src="71562337-C805-4C7C-80B2-684903FA5A9E.png" alt></p>
+<p><img src="328D6772-F156-428B-9E89-4CC4763C2805.png" alt></p>
+<ul>
+<li>full gc时才会回收堆外内存。</li>
+<li><a href="https://colobu.com/2015/08/17/java-directbytebuffer/" target="_blank" rel="noopener">Netty之Java堆外内存扫盲贴 | 鸟窝</a></li>
+<li>每个 Channel 都有一个 ChannelPipeline<br><img src="DC662A6E-6D49-4310-A58B-680F913EBC40.png" alt><br>通过上图我们可以看到, 一个 Channel 包含了一个 ChannelPipeline, 而 ChannelPipeline 中又维护了一个由 ChannelHandlerContext 组成的双向链表. 这个链表的头是 HeadContext, 链表的尾是 TailContext, 并且每个 ChannelHandlerContext 中又关联着一个 ChannelHandler<br><strong>LineBasedFrameDecoder关键源码剖析</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">decode</span><span class="params">(ChannelHandlerContext ctx, ByteBuf buffer)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> eol = findEndOfLine(buffer);</span><br><span class="line">    <span class="keyword">if</span> (!discarding) &#123;</span><br><span class="line">        <span class="keyword">if</span> (eol &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="comment">// 找到分隔符</span></span><br><span class="line">            <span class="keyword">final</span> ByteBuf frame;</span><br><span class="line">				<span class="comment">// 需要读取的长度为第一个分隔符偏移量减去readerIndex</span></span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> length = eol - buffer.readerIndex();</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> delimLength = buffer.getByte(eol) == <span class="string">'\r'</span>? <span class="number">2</span> : <span class="number">1</span>;</span><br><span class="line">				<span class="comment">// 超过最大长度则异常并修改readerIndex 抛弃数据</span></span><br><span class="line">            <span class="keyword">if</span> (length &gt; maxLength) &#123;</span><br><span class="line">                buffer.readerIndex(eol + delimLength);</span><br><span class="line">                fail(ctx, length);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (stripDelimiter) &#123;</span><br><span class="line">                frame = buffer.readRetainedSlice(length);</span><br><span class="line">                buffer.skipBytes(delimLength);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="comment">//  返回子bytebuf，包含分隔符</span></span><br><span class="line">                frame = buffer.readRetainedSlice(length + delimLength);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> frame;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="comment">// 未找到分隔符</span></span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> length = buffer.readableBytes();<span class="comment">//当前可读字节数</span></span><br><span class="line">            <span class="keyword">if</span> (length &gt; maxLength) &#123;<span class="comment">// 大于消息最大字节数</span></span><br><span class="line">                discardedBytes = length;<span class="comment">//抛弃当前可读字节</span></span><br><span class="line">                buffer.readerIndex(buffer.writerIndex());<span class="comment">//readerIndex修改为writerIndex</span></span><br><span class="line">                discarding = <span class="keyword">true</span>; <span class="comment">// 抛弃模式</span></span><br><span class="line">                offset = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">if</span> (failFast) &#123;</span><br><span class="line">                    fail(ctx, <span class="string">"over "</span> + discardedBytes);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;<span class="comment">// 返回null, 表示什麼都沒解析出來, 等著下次解析</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (eol &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="comment">// 虽然找到了分隔符，但是当前为抛弃模式，所以这是上个超过最大长度的消息的一部分也就是一个半包消息，不做处理，继续往下read</span></span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> length = discardedBytes + eol - buffer.readerIndex();</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> delimLength = buffer.getByte(eol) == <span class="string">'\r'</span>? <span class="number">2</span> : <span class="number">1</span>;</span><br><span class="line">            buffer.readerIndex(eol + delimLength);</span><br><span class="line">            discardedBytes = <span class="number">0</span>;<span class="comment">// discardedBytes</span></span><br><span class="line">            discarding = <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">if</span> (!failFast) &#123;</span><br><span class="line">                fail(ctx, length);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="comment">// 未找到分隔符，因为处于抛弃模式，所以同上，抛弃之，但是要更新discardedBytes，方便日志记录</span></span><br><span class="line">            discardedBytes += buffer.readableBytes();</span><br><span class="line">            buffer.readerIndex(buffer.writerIndex()); <span class="comment">// 继续往下读</span></span><br><span class="line">            offset = <span class="number">0</span>;<span class="comment">// 因为修改了readerIndex 所以这里也重置偏移量</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//查找最近一个分隔符</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">findEndOfLine</span><span class="params">(<span class="keyword">final</span> ByteBuf buffer)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//当前bytebuf可读长度 writerIndex-readerIndex</span></span><br><span class="line">    <span class="keyword">int</span> totalLength = buffer.readableBytes();</span><br><span class="line">    <span class="keyword">int</span> i = buffer.forEachByte(buffer.readerIndex() + offset, totalLength - offset, ByteProcessor.FIND_LF);</span><br><span class="line">    <span class="keyword">if</span> (i &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        offset = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; buffer.getByte(i - <span class="number">1</span>) == <span class="string">'\r'</span>) &#123;</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">// 未找到便修改偏移量，防止下次重复寻找</span></span><br><span class="line">        offset = totalLength;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="DBC1CAF4-01FF-4DF4-B6EA-FFB05E20103B.png" alt></p>
+<p><img src="99C2D487-CD66-40E4-9804-EBA44BAAD6F2.png" alt><br><img src="9D73334E-086E-4F57-B80A-64EA23AE6E5B.png" alt></p>
+<p><img src="08AD014E-B61C-45E8-997D-36F929436922.png" alt></p>
+<ul>
+<li>Netty 4 的 Channel 多了一个 autoread 参数, 它的用处是在让 channel 在触发某些事件以后(例如 channelActive, channelReadComplete)以后还会自动调用一次 read()</li>
+<li><img src="979AC878-3D92-4DEA-9544-A780606DD7C2.png" alt></li>
+</ul>
+<p><strong>断包、粘包问题的解决</strong></p>
+<ul>
+<li>解决思路是在封装自己的包协议：包=包内容长度(4byte)+包内容</li>
+<li>对于粘包问题先读出包头即包体长度n，然后再读取长度为n的包内容，这样数据包之间的边界就清楚了。</li>
+<li>对于断包问题先读出包头即包体长度n，由于此次读取的缓存池长度小于n，这时候就需要先缓存这部分的内容，等待下次read事件来时拼接起来形成完整的数据包。</li>
+<li>由于读取channel数据到ByteBuffer缓存池时ByteBuffer的大小限制，client的一次write事件不一定一一对应server的read事件，所以需要一个全局变量来缓存这部分不完整的数据包</li>
+</ul>
+<p>NioEventLoopGroup实际上就是个线程池，NioEventLoopGroup在后台启动了n个NioEventLoop来处理Channel事件,每一个NioEventLoop负责处理m个Channel，NioEventLoopGroup从NioEventLoop数组里挨个取出NioEventLoop来处理Channel。<br>channelHandler的典型用例包括：</p>
+<pre><code>* 将数据从一种格式转换为另一种格式；
+* 提供异常的通知；
+* 提供Channel变为活动的或者非活动的通知；
+* 提供当Channel注册到EventLoop或者从EventLoop注销时的通知；
+* 提供有关用户自定义事件的通知。
+</code></pre><p>在Netty中，有两种发送消息的方式。你可以直接写到Channel中，也可以写到和Channel-Handler相关联的ChannelHandlerContext对象中。前一种方式将会导致消息从Channel-Pipeline的尾端开始流动，而后者将导致消息从ChannelPipeline中的下一个Channel-Handler开始流动。</p>
+<ul>
+<li>一个EventLoop在它的生命周期内只和一个Thread绑定；</li>
+<li>所有由EventLoop处理的I/O事件都将在它专有的Thread上被处理；</li>
+<li>一个Channel在它的生命周期内只注册于一个EventLoop ；</li>
+<li>一个EventLoop可能会被分配给一个或多个Channel 。</li>
+</ul>
+<p>epoll是linux特定内核，比如2.6以上的io方式。比如stackoverflow上有两者的比较，有人给出回复：If you are running on linux you can use EpollEventLoopGroup and so get better performance, less GC and have more advanced features that are only available on linux.就是在linux上使用EpollEventLoopGroup会有较少的gc有更高级的特性，只有在Linux上才可以使用。那么这句话几乎告诉我们epoll是最好的了，因为现在几乎所有的服务端程序都运行在Linux上。</p>
+<p>NioEventLoop循环调用 Selector中的注册的SelectionKey获取每个连接的数据。然后把获取到的字节数据传送给ChannelPipeline处理。EpollEventLoop通过epollWait来得到数据事件，循环EpollEventArray的事件处理每个连接的数据。也是传给ChannelPipeline处理。所以epoll相对性能更高一些。Netty4增加了sharable注解，使得handler能够被添加到多个ChannelPipeline中，一个handler可以产生多个ChannelHandlerContext，使得对应的handler可以在不同的channel中使用，此时应该注意线程安全</p>
+<p>当我们把一个Direct Buffer写入Channel的时候，就好比是“内核缓冲区”的内容直接写入了Channel，这样显然快了，减少了数据拷贝（因为我们平时的read/write都是需要在I/O设备与应用程序空间之间的“内核缓冲区”中转一下的）。而当我们把一个Heap Buffer写入Channel的时候，实际上底层实现会先构建一个临时的Direct Buffer，然后把Heap Buffer的内容复制到这个临时的Direct Buffer上，再把这个Direct Buffer写出去。当然，如果我们多次调用write方法，把一个Heap Buffer写入Channel，底层实现可以重复使用临时的Direct Buffer，这样不至于因为频繁地创建和销毁Direct Buffer影响性能</p>
+<p><a href="https://tech.meituan.com/2018/10/18/netty-direct-memory-screening.html" target="_blank" rel="noopener">Netty堆外内存泄露排查盛宴 - 美团技术团队</a><br><a href="https://segmentfault.com/a/1190000007308934" target="_blank" rel="noopener">Netty 源码分析之 二 贯穿Netty 的大动脉 ── ChannelPipeline (一) - 后台开发 - SegmentFault 思否</a></p>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <a href="https://iamnotshady.github.io" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2016 iamnotshady</li>
+      <li><a href="https://iamnotshady.github.io">Home</a></li>
+      
+      <li><a href="https://github.com/IamNotShady">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

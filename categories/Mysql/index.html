@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>
-    categories | Lose Yourself
+    Lose Yourself
   </title>
   <meta name="description" content="在信息时代，客观障碍已不复存在，所谓障碍都是主观上的。">
   
@@ -72,7 +72,9 @@
 </nav>
 
 <div class="main-container">
-  <div class="container-lg">
+  
+
+<div class="container-lg">
   
 
 <div class="blog-intro">
@@ -150,11 +152,63 @@
 </nav>
 
     <div class="body-secondary">
-
-      
-      
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Netty/">Netty</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Cloud/">Spring Cloud</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/">Spring Security</a><span class="category-list-count">1</span></li></ul>
-      
+      <ul class="archive-list">
+        
+        <li class="archive-list-item">
+          <h2><a href="/2019/03/10/Mysql-Innodb-Lock/">Mysql InnoDB 锁总结</a></h2>
+          <p>
+               锁类型  
+  排他锁(写锁、X锁) 
+   会阻塞其他事物读和写 
+ 
+  共享锁(读锁、S锁) 
+   会阻塞其他事物修改表数据 
+ 
+  意向锁 
+   意向锁与行锁互不排斥，意向锁之间互不排斥，意向锁与表锁互斥! 
+ 
+ 
+   锁粒度  
+  行锁 
+   开销大，加锁慢；会出现死锁...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item">Mysql</li>
+            
+          </ul>
+          <div class="post-info">
+            <span><i class="fa fa-folder-open"></i> Mysql </span>
+            <span><i class="fa fa-tag"></i> 1 </span>
+            <span>Published {{moment(1552205830000).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2019/03/06/mysql-order-by/">Mysql ORDER BY优化总结</a></h2>
+          <p>
+               ORDER BY优化  
+  尽量对较少的行进行排序 
+ 
+  如果连接了多张表，ORDER BY的列应该属于连接顺序的第一张表 
+ 
+  利用索引排序，如果不能利用索引排序，那么EXPLAIN查询语句将会看到有filesort 
+ 
+  需要保证索引列和ORDER BY的列相同，且各列均按相...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item">Mysql</li>
+            
+          </ul>
+          <div class="post-info">
+            <span><i class="fa fa-folder-open"></i> Mysql </span>
+            <span><i class="fa fa-tag"></i> 1 </span>
+            <span>Published {{moment(1551834263000).fromNow()}}</span>
+          </div>
+        </li>
+        
+      </ul>
     </div>
   </div>
 </div>
